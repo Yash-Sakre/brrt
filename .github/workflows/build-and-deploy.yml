@@ -23,10 +23,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
+      # pnpm 11 needs Node >= 22.13 (it requires node:sqlite), and `cache: pnpm`
+      # shells out to pnpm here — on Node 20 that crashes before install runs.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install dependencies
