@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => ({
   // current name. Dev stays at / so `pnpm dev` is still just localhost:5173.
   base:
     command === 'build'
-      ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'TypeArena'}/`
+      ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'brrt'}/`
       : '/',
   plugins: [react()],
   resolve: {
