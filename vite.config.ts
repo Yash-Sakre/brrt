@@ -4,12 +4,12 @@ import path from 'node:path';
 
 export default defineConfig(({ command }) => ({
   // GitHub Pages serves a project site under /<repo>/, so built asset URLs
-  // need that prefix. In CI we read it from GITHUB_REPOSITORY ("owner/repo")
-  // so renaming the repo needs no config change; local builds fall back to the
-  // current name. Dev stays at / so `pnpm dev` is still just localhost:5173.
+  // need that prefix. We read it from GITHUB_REPOSITORY ("owner/repo") inside
+  // GitHub Actions only — every other target (Vercel, dev, local builds)
+  // serves from the domain root, so they stay at /.
   base:
-    command === 'build'
-      ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'brrt'}/`
+    command === 'build' && process.env.GITHUB_ACTIONS === 'true'
+      ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''}/`
       : '/',
   plugins: [react()],
   resolve: {
