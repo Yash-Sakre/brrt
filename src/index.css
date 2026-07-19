@@ -4,77 +4,169 @@
 
 @layer base {
   :root {
-    --background: 37 44% 96%;
-    --foreground: 212 42% 14%;
-    --card: 36 52% 98%;
-    --card-foreground: 212 42% 14%;
-    --popover: 36 52% 98%;
-    --popover-foreground: 212 42% 14%;
-    --primary: 189 78% 37%;
-    --primary-foreground: 186 100% 96%;
-    --secondary: 38 30% 90%;
-    --secondary-foreground: 209 40% 20%;
-    --muted: 40 20% 92%;
-    --muted-foreground: 210 20% 35%;
-    --accent: 26 86% 86%;
-    --accent-foreground: 20 55% 20%;
-    --destructive: 0 72% 48%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 38 22% 82%;
-    --input: 38 22% 82%;
-    --ring: 189 78% 37%;
-    --chart-1: 189 78% 37%;
-    --chart-2: 19 76% 62%;
-    --chart-3: 43 75% 52%;
-    --chart-4: 221 74% 56%;
-    --chart-5: 141 53% 42%;
-    --sidebar: 36 52% 98%;
-    --sidebar-foreground: 212 42% 14%;
-    --sidebar-primary: 189 78% 37%;
-    --sidebar-primary-foreground: 186 100% 96%;
-    --sidebar-accent: 26 86% 86%;
-    --sidebar-accent-foreground: 20 55% 20%;
-    --sidebar-border: 38 22% 82%;
-    --sidebar-ring: 189 78% 37%;
-    --font-sans: Geist, sans-serif;
-    --font-serif: Bitter, serif;
-    --font-mono: Geist Mono, monospace;
-    --radius: 0.9rem;
+    --radius: 0.85rem;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   }
 
-  .dark {
-    --background: 217 40% 10%;
-    --foreground: 38 46% 92%;
-    --card: 216 36% 14%;
-    --card-foreground: 38 46% 92%;
-    --popover: 216 36% 14%;
-    --popover-foreground: 38 46% 92%;
-    --primary: 188 88% 52%;
-    --primary-foreground: 215 45% 10%;
-    --secondary: 216 26% 20%;
-    --secondary-foreground: 38 40% 88%;
-    --muted: 216 22% 18%;
-    --muted-foreground: 215 18% 70%;
-    --accent: 28 75% 42%;
-    --accent-foreground: 35 100% 92%;
-    --destructive: 0 76% 55%;
-    --destructive-foreground: 0 0% 96%;
-    --border: 217 20% 28%;
-    --input: 217 20% 28%;
-    --ring: 188 88% 52%;
-    --chart-1: 188 88% 52%;
-    --chart-2: 20 85% 58%;
-    --chart-3: 49 90% 60%;
-    --chart-4: 220 70% 64%;
-    --chart-5: 142 60% 50%;
-    --sidebar: 216 36% 14%;
-    --sidebar-foreground: 38 46% 92%;
-    --sidebar-primary: 188 88% 52%;
-    --sidebar-primary-foreground: 215 45% 10%;
-    --sidebar-accent: 28 75% 42%;
-    --sidebar-accent-foreground: 35 100% 92%;
-    --sidebar-border: 217 20% 28%;
-    --sidebar-ring: 188 88% 52%;
+  /* ---------------------------------------------------------------- themes */
+  /* `:root` mirrors the default theme so colors always resolve, even before
+     the theme bootstrap runs — no blank/unstyled page on a slow first paint. */
+  :root,
+  [data-theme='arena-dark'] {
+    --background: 224 30% 6%;
+    --foreground: 213 28% 91%;
+    --card: 223 26% 9%;
+    --card-foreground: 213 28% 91%;
+    --popover: 223 26% 9%;
+    --popover-foreground: 213 30% 92%;
+    --primary: 262 83% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 18% 15%;
+    --secondary-foreground: 213 25% 86%;
+    --muted: 222 16% 13%;
+    --muted-foreground: 215 15% 60%;
+    --accent: 222 18% 17%;
+    --accent-foreground: 213 30% 92%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 14% 15%;
+    --input: 222 14% 16%;
+    --ring: 187 82% 53%;
+    --correct: 213 35% 94%;
+    --incorrect: 358 75% 64%;
+    --untyped: 216 14% 42%;
+    --caret: 187 82% 53%;
+  }
+
+  [data-theme='arena-light'] {
+    --background: 40 38% 94%;
+    --foreground: 217 33% 16%;
+    --card: 40 44% 97%;
+    --card-foreground: 217 33% 16%;
+    --popover: 40 44% 97%;
+    --popover-foreground: 217 33% 16%;
+    --primary: 262 64% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 26% 88%;
+    --secondary-foreground: 217 30% 22%;
+    --muted: 40 22% 89%;
+    --muted-foreground: 216 16% 42%;
+    --accent: 38 30% 85%;
+    --accent-foreground: 217 30% 22%;
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 38 22% 80%;
+    --input: 38 22% 80%;
+    --ring: 190 84% 33%;
+    --correct: 217 38% 18%;
+    --incorrect: 0 72% 50%;
+    --untyped: 216 14% 60%;
+    --caret: 190 84% 33%;
+  }
+
+  [data-theme='midnight'] {
+    --background: 224 39% 7%;
+    --foreground: 222 28% 88%;
+    --card: 224 34% 10%;
+    --card-foreground: 222 28% 88%;
+    --popover: 224 34% 10%;
+    --popover-foreground: 222 28% 90%;
+    --primary: 231 100% 74%;
+    --primary-foreground: 224 47% 8%;
+    --secondary: 224 24% 16%;
+    --secondary-foreground: 222 24% 84%;
+    --muted: 224 22% 14%;
+    --muted-foreground: 223 16% 60%;
+    --accent: 224 26% 19%;
+    --accent-foreground: 222 28% 90%;
+    --destructive: 350 75% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 224 22% 18%;
+    --input: 224 22% 20%;
+    --ring: 231 100% 74%;
+    --correct: 222 30% 94%;
+    --incorrect: 350 80% 68%;
+    --untyped: 224 14% 40%;
+    --caret: 231 100% 74%;
+  }
+
+  [data-theme='matcha'] {
+    --background: 156 30% 9%;
+    --foreground: 150 24% 90%;
+    --card: 156 26% 12%;
+    --card-foreground: 150 24% 90%;
+    --popover: 156 26% 12%;
+    --popover-foreground: 150 24% 92%;
+    --primary: 146 64% 66%;
+    --primary-foreground: 156 47% 9%;
+    --secondary: 156 18% 17%;
+    --secondary-foreground: 150 20% 86%;
+    --muted: 156 16% 15%;
+    --muted-foreground: 152 14% 58%;
+    --accent: 156 20% 20%;
+    --accent-foreground: 150 24% 92%;
+    --destructive: 6 72% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 156 16% 20%;
+    --input: 156 16% 22%;
+    --ring: 146 64% 66%;
+    --correct: 150 28% 94%;
+    --incorrect: 6 76% 66%;
+    --untyped: 154 12% 42%;
+    --caret: 146 64% 66%;
+  }
+
+  [data-theme='ember'] {
+    --background: 16 42% 8%;
+    --foreground: 24 30% 92%;
+    --card: 16 36% 11%;
+    --card-foreground: 24 30% 92%;
+    --popover: 16 36% 11%;
+    --popover-foreground: 24 30% 94%;
+    --primary: 18 100% 68%;
+    --primary-foreground: 16 47% 9%;
+    --secondary: 16 24% 17%;
+    --secondary-foreground: 24 26% 88%;
+    --muted: 16 22% 15%;
+    --muted-foreground: 20 16% 60%;
+    --accent: 16 26% 20%;
+    --accent-foreground: 24 30% 94%;
+    --destructive: 0 78% 62%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 16 22% 20%;
+    --input: 16 22% 22%;
+    --ring: 18 100% 68%;
+    --correct: 24 34% 95%;
+    --incorrect: 0 82% 68%;
+    --untyped: 18 14% 44%;
+    --caret: 18 100% 68%;
+  }
+
+  [data-theme='paper'] {
+    --background: 40 33% 96%;
+    --foreground: 30 14% 14%;
+    --card: 40 40% 98%;
+    --card-foreground: 30 14% 14%;
+    --popover: 40 40% 98%;
+    --popover-foreground: 30 14% 14%;
+    --primary: 22 62% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 24% 89%;
+    --secondary-foreground: 30 16% 22%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 30 12% 40%;
+    --accent: 38 28% 86%;
+    --accent-foreground: 30 16% 22%;
+    --destructive: 0 68% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 38 20% 82%;
+    --input: 38 20% 82%;
+    --ring: 22 62% 44%;
+    --correct: 30 16% 16%;
+    --incorrect: 0 70% 50%;
+    --untyped: 30 10% 62%;
+    --caret: 22 62% 44%;
   }
 
   * {
@@ -82,33 +174,82 @@
     box-sizing: border-box;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
+    margin: 0;
     min-height: 100vh;
-    overflow: hidden;
     font-family: var(--font-sans);
-    background-image:
-      radial-gradient(circle at 12% 16%, hsl(var(--primary) / 0.12), transparent 36%),
-      radial-gradient(circle at 88% 82%, hsl(var(--accent) / 0.2), transparent 34%);
+    font-feature-settings: 'cv05', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Subtle top-down depth so the dark backdrop isn't a flat slab. */
+    background-image: radial-gradient(
+      120% 80% at 50% -10%,
+      hsl(var(--primary) / 0.06),
+      transparent 55%
+    );
     background-attachment: fixed;
   }
 }
 
-@layer components {
-  .typing-caret span:last-child::after {
-    content: '';
-    display: inline-block;
-    width: 2px;
-    height: 1.1em;
-    margin-left: 2px;
-    vertical-align: text-bottom;
-    background-color: hsl(var(--primary));
-    animation: cursor-blink 0.7s steps(2) infinite;
+@layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Hide the focus-capturing input while keeping it reachable to the keyboard. */
+  .sr-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: default;
+    border: 0;
+    resize: none;
   }
 }
 
-@keyframes cursor-blink {
-  0% {
+/* ------------------------------------------------------------------ caret */
+/* These names avoid a `caret-*` prefix on purpose: tailwind-merge reads that as
+   the `caret-color` utility group and would keep only the last one applied. */
+
+/* Glides the caret between characters on a line. Transform-only, so the motion
+   runs on the compositor and never re-lays-out the text behind it. The class is
+   dropped for the frame a line wraps, which makes that step land instantly. */
+.typing-caret-glide {
+  transition: transform 110ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes typing-caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0;
+  }
+}
+
+/* Only applied once typing pauses — a blink mid-glide strobes the moving bar. */
+.typing-caret-blink {
+  animation: typing-caret-blink 1s step-end infinite;
+}
+
+/* Slides the finished line out of view under the caret. */
+.typing-scroll {
+  transition: transform 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }

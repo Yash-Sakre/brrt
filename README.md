@@ -1,77 +1,81 @@
-# React Shadcn Starter
+# brrt
 
-React + Vite + TypeScript template for building apps with shadcn/ui.
+A fast, minimal typing speed test. Multiple modes, polished themes, detailed
+per-run analytics — all client-side, no account required.
 
-## Getting Started
-
-```
-git clone https://github.com/hayyi2/react-shadcn-starter.git new-project
-cd new-project
-npm install
-npm run dev
-```
-
-## Getting Done
-
-- [x] Single page app with navigation and responsif layout
-
-- [x] Customable configuration `/config`
-
-- [x] Simple starting page/feature `/pages`
-
-- [x] Github action deploy github pages
-
-## Deploy `gh-pages`
-- change `basenameProd` in `/vite.config.ts`
-- create deploy key `GITHUB_TOKEN` in github `/settings/keys`
-- commit and push changes code
-- setup gihub pages to branch `gh-pages`
-- run action `Build & Deploy`
-
-### Auto Deploy
-- change file `.github/workflows/build-and-deploy.yml`
-- Comment on `workflow_dispatch`
-- Uncomment on `push`
-```yaml
-# on:
-#   workflow_dispatch:
-on:
-  push:
-    branches: ["main"]
-```
+![status](https://img.shields.io/badge/build-passing-a78bfa) ![license](https://img.shields.io/badge/license-MIT-blue)
 
 ## Features
 
-- React + Vite + TypeScript
-- Tailwind CSS
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [shadcn-ui](https://github.com/shadcn-ui/ui/)
-- [radix-ui/icons](https://www.radix-ui.com/icons)
+- **Modes** — time (15/30/60/120s), words (10/25/50/100), quote, zen, and custom text
+- **Toggles** — punctuation and numbers, across `english`, `english 1k`, and `code` wordlists
+- **Live feedback** — animated caret (line / block / underline), smooth line scrolling, optional keypress sound
+- **Rich results** — net & raw WPM, accuracy, consistency, CPM, a per-second WPM chart, character breakdown, and a keyboard "trouble keys" heatmap
+- **Progress** — per-mode personal bests, run history, and daily streaks (persisted locally)
+- **Command palette** — `⌘K` / `Ctrl K` to switch mode, theme, or jump anywhere
+- **6 themes**, fully responsive, mobile-friendly typing, reduced-motion aware
 
-## Project Structure
+## Tech stack
+
+React 18 · TypeScript · Vite 5 · Tailwind CSS · Radix UI · Zustand · cmdk
+
+## Architecture
+
+The codebase is split into a framework-agnostic core and a thin React binding —
+this keeps the hard logic pure and unit-tested, and isolates UI concerns.
 
 ```
-react-shadcn-starter/
-├── public/            # Public assets
-├── src/               # Application source code
-│   ├── components/    # React components
-│   │   └── ui/        # shadc/ui components
-│   │   └── layouts/   # layouts components
-│   ├── context/       # contexts components
-│   ├── config/        # Config data
-│   ├── hook/          # Custom hooks
-│   ├── lib/           # Utility functions
-│   ├── pages/         # pages/features components
-│   ├── App.tsx        # Application entry point
-│   ├── index.tsx      # Main rendering file
-│   └── Router.tsx     # Routes component
-├── index.html         # HTML entry point
-├── postcss.config.js  # PostCSS configuration
-├── tailwind.config.js # Tailwind CSS configuration
-├── tsconfig.json      # TypeScript configuration
-└── vite.config.ts     # Vite configuration
+src/
+  core/            Pure TypeScript — no React, no side effects, fully tested
+    engine.ts        Typing state machine (a deterministic reducer)
+    metrics.ts       WPM / accuracy / consistency / char-stat math
+    result.ts        Finalize an engine run into a TestResult
+    words.ts         Text generation (punctuation, numbers)
+    wordlists/       Curated word pools and quotes
+    storage.ts       StoragePort — the single IO boundary (swap for a backend)
+  stores/          Zustand stores wiring the core to React
+    useTestStore     Live test orchestration (engine + timing + sampling)
+    useSettingsStore Config + appearance (persisted)
+    useStatsStore    History, personal bests, streaks (persisted)
+    useUiStore       Transient overlay / focus state
+  features/        Feature-first UI (typing-test, results, settings, history, …)
+  components/ui/    Reusable primitives (button, dialog, command, …)
+  config/          Themes and presets
 ```
+
+Why this shape:
+
+- **The engine is a pure reducer.** It never reads the wall clock — every action
+  carries its own timestamp — so it is deterministic and trivial to test.
+- **Storage is an interface.** All persistence flows through `StoragePort`, so
+  swapping localStorage for a backend (accounts, cloud sync) is a single change.
+- **Stores are thin.** They translate user intent into engine actions and own
+  only the side effects (timers, RNG, persistence).
+
+## Getting started
+
+```bash
+pnpm install
+pnpm dev          # start the dev server
+pnpm lint         # eslint
+pnpm typecheck    # tsc project references
+pnpm build        # production build to dist/
+```
+
+## Keyboard shortcuts
+
+| Key            | Action                    |
+| -------------- | ------------------------- |
+| `esc` / `tab`  | restart the current test  |
+| `⌘K` / `Ctrl K`| open the command palette  |
+| `enter`        | finish a zen test         |
+
+## Deployment
+
+Pushing to `main` runs lint and a build via GitHub Actions, then publishes
+`dist/` to the `gh-pages` branch. The app is a static site and can be
+hosted anywhere (Netlify, Vercel, GitHub Pages, …).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/hayyi2/react-shadcn-starter/blob/main/LICENSE) file for details. 
+MIT — see [LICENSE](./LICENSE).

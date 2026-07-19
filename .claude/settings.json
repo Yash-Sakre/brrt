@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(pnpm -v)",
+      "Bash(pnpm install *)",
+      "Bash(xxd)",
+      "Bash(pnpm typecheck *)",
+      "Bash(echo \"typecheck exit: $?\")",
+      "Bash(pnpm build *)",
+      "Bash(pnpm lint *)",
+      "Bash(echo \"lint exit: $?\")",
+      "Bash(pkill -f \"vite --port 5180\")",
+      "Bash(pnpm exec *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)",
+      "WebFetch(domain:react.doctor)"
+    ]
+  }
+}
