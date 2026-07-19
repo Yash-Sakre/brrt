@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/brrt/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta
+      name="description"
+      content="brrt — a fast, minimal typing speed test. Multiple modes, themes, and detailed stats."
+    />
+    <meta name="theme-color" content="#0d1322" />
+    <title>brrt — Typing Speed Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Apply the saved theme before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var raw = localStorage.getItem('type-arena:settings');
+          var id = 'arena-dark';
+          var dark = true;
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            var s = parsed && parsed.state ? parsed.state : parsed;
+            if (s && s.themeId) id = s.themeId;
+          }
+          var lightThemes = ['arena-light', 'paper'];
+          dark = lightThemes.indexOf(id) === -1;
+          var el = document.documentElement;
+          el.setAttribute('data-theme', id);
+          el.classList.toggle('dark', dark);
+          el.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'arena-dark');
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/brrt/assets/index-BQ9QlHy6.js"></script>
+    <link rel="stylesheet" crossorigin href="/brrt/assets/index-LCZlzwR6.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
